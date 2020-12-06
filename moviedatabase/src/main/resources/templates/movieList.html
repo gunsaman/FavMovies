@@ -11,71 +11,70 @@
 </head>
 <body>
 	<div class="container">
-	<h1>Latest Movies</h1>
-	<div class="col-md-4">
+		<div>
+		<h1>Movie database</h1>
+		
+		
+		</div>
+	<div class="col-md-4 ">
 		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
 	</div>
+	<ul class="nav nav-pills nav-fill">
+		  <li class="nav-item">
+		    <a class="nav-link " href="/playlist" ><button class="btn btn-success">Playlist</button> </a>
+		  </li>
+		   <li class="nav-item">
+		    <a class="nav-link" href="/latest"><button class="btn btn-success">latest</button></a>
+		  </li>
+		   <li class="nav-item">
+		    <a class="nav-link" href="/upcoming"><button class="btn btn-success">upcoming</button></a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="/add"><button class="btn btn-success">add new movie</button></a>
+		  </li>
+		  
+		  
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+				</form>
+		
+			
+		  
+		 
+	</ul>
+		<div class="row align-items-center justify-content-center">
 	
-	<div class="row align-items-center justify-content-center">
-	
-	<div class="col-md-4" style="padding:20px 0">
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
-		</form>
-	</div>
-		<a href="/add" class="btn btn-success">Movie not in the list?</a>
-		<a href="/playlist" class="btn btn-success">view playlist</a></div>	
-		<div class="container">
-			<div class="card">
-				<div class="card-block">
-				<table class="table  table-bordered table-hover table-striped">
-					<thead class="thead-dark">
-						<tr>
-					    <th>Movie</th>
-					    <th>Release Year</th>
-					    <th>overview</th>
-					    <th></th>
+			
+			
+			<div class="container">
+				<div class="card">
+					<div class="card-block">
+					<table class="table  table-bordered table-hover table-striped">
+						<thead class="thead-dark">
+							<tr>
+						    <th>Movie</th>
+						    <th>Release Year</th>
+						    <th>overview</th>
+						    <th></th>
+							</tr>
+						<thead>
+					<tbody id="myTable">
+						<tr th:each = "movie : ${movielist}">
+							<td th:text="${movie.title}"></td>
+							
+							<td class="" th:text="${movie.release_date}"></td>
+	<!-- 						<td th:text="${movie.overview}"></td> -->
+							
+							<td class="bg-warning"><a th:href="@{/details/{id}(id=${movie.id})}"  class="btn btn-outline">details</a></td>
+							
+							<td><a th:href="@{/addPlaylist/{id}(id=${movie.id})}"  class="btn btn-primary">Add</a></td> 
 						</tr>
-					<thead>
-				<tbody id="myTable">
-					<tr th:each = "movie : ${movielist}">
-						<td th:text="${movie.title}"></td>
-						
-						<td class="" th:text="${movie.release_date}"></td>
-<!-- 						<td th:text="${movie.overview}"></td> -->
-						
-						<td class="bg-warning"><a th:href="@{/details/{id}(id=${movie.id})}"  class="btn btn-outline">details</a></td>
-						
-						<td><a th:href="@{/addPlaylist/{id}(id=${movie.id})}"  class="btn btn-primary">Add</a></td> 
-					</tr>
-				</tbody>		
-				</table>
-				<div th:if ="${totalPages >1}">
-					<div class="row col-sm-10">
-						<div class="col-sm-2">
-							Total Rows:[[${totalItems}]]
-						</div>
-						<div class="col-sm-1">
-							<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-								<a th:if = "${currentPage !=i}" th:href="@{'/page/'+${i}}">[[${i}]]</a>
-								<span th:unless="${cerrentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
-							</span>
-						</div>
-						<div class="col-sm-1">
-							<a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${totalPages+1}}">Next</a>
-							<span th:unless="${currentPage <totalPages">Next</span>
-						</div>
-						<div class="col-sm-1">
-							<a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${totalPages}}">Last</a>
-							<span th:unless="${currentPage <totalPages">Last</span>
-						</div>
-						
+					</tbody>		
+					</table>
+					
 					</div>
 				</div>
-				
-				</div>
-			</div>
-		</div>	
+			</div>	
 	</div>
 	
 	 
