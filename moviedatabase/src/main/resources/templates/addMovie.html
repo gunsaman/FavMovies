@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MovieList</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head> 
+<body>
+	<div class="container">
+	<h1>Add Movie</h1>
+	
+			<a th:href="@{/movieList}" class="btn btn-outline-primary ">Back</a>
+			
+	
+	<div class="card">	
+		<form th:object="${movie}" th:action="@{save}" action="#" method="post">
+			<label for="movieName">Title</label> <input type="text" id="title"
+				th:field="*{title}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="movieYear">Release Year</label> <input type="text" id="movieYear"
+				th:field="*{release_date}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="movieDesc">Description</label> <textarea class="form-control" placeholder="Please write customer notes" ng-model="myTextarea" required data-error="Please enter customer notes" th:field="*{overview}"></textarea>		
+			
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+	</div>
+	
+</body>
+</html>
